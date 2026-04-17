@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results - Credit Card Fraud Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">Credit Card Fraud Detection</div>
+  </nav>
+
+  <main class="container result-page">
+
+```
+<h1 class="page-title">Results</h1>
+
+<!-- SUMMARY -->
+<section class="summary-card">
+  <h2>Summary</h2>
+
+  <div class="summary-grid">
+    <div class="summary-item">
+      <span class="label">FRAUD COUNT</span>
+      <span class="value">{{ fraud }}</span>
+    </div>
+
+    <div class="summary-item">
+      <span class="label">NON-FRAUD COUNT</span>
+      <span class="value">{{ legit }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL RESULTS -->
+<section class="models-section">
+  <h2>Model Results</h2>
+
+  <div class="models-grid results-grid">
+    {% set best_accuracy = model_results | map(attribute='accuracy') | max %}
+    {% for model in model_results %}
+
+    <div class="model-card {% if model.accuracy == best_accuracy %}model-card-best{% endif %}">
+
+      {% if model.accuracy == best_accuracy %}
+      <span class="best-badge">BEST</span>
+      {% endif %}
+
+      <h3 class="model-title">{{ model.name }}</h3>
+
+      <div class="divider"></div>
+
+      <div class="model-stats">
+        <div class="stat">
+          <span class="label">ACCURACY</span>
+          <span class="value">{{ model.accuracy }}%</span>
+        </div>
+
+        <div class="stat">
+          <span class="label">ERROR RATE</span>
+          <span class="value">{{ model.error_rate }}%</span>
+        </div>
+
+        <div class="stat">
+          <span class="label">FRAUD</span>
+          <span class="value">{{ model.fraud }}</span>
+        </div>
+
+        <div class="stat">
+          <span class="label">NON-FRAUD</span>
+          <span class="value">{{ model.legit }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+
+<!-- BACK BUTTON -->
+<div class="back-link">
+  <a href="/" class="btn-submit">Upload Another File</a>
+</div>
+```
+
+  </main>
+</body>
+</html>

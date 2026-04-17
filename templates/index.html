@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credit Card Fraud Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">Credit Card Fraud Detection</div>
+
+    <div class="navbar-links">
+      <a href="#upload-section">Access Model</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- SECTION 1: HERO -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Credit Card Fraud Detection</h1>
+        <p class="hero-subtext">
+          A machine learning web application to detect fraudulent transactions
+        </p>
+      </div>
+      <div class="hero-image">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Credit card illustration">
+          <rect x="10" y="10" width="300" height="180" rx="14" ry="14" fill="#1a1a1a" stroke="#ffffff" stroke-width="1"/>
+          <rect x="30" y="55" width="50" height="38" rx="5" ry="5" fill="#2a2a2a" stroke="#ffffff" stroke-width="0.8"/>
+          <line x1="35" y1="68" x2="75" y2="68" stroke="#0d0d0d" stroke-width="0.8"/>
+          <line x1="35" y1="78" x2="75" y2="78" stroke="#0d0d0d" stroke-width="0.8"/>
+          <line x1="55" y1="58" x2="55" y2="90" stroke="#0d0d0d" stroke-width="0.8"/>
+          <text x="30" y="135" font-family="monospace" font-size="18" fill="#ffffff" letter-spacing="3">
+            •••• •••• •••• 1234
+          </text>
+          <text x="30" y="165" font-family="monospace" font-size="9" fill="#9a9a9a">CARDHOLDER</text>
+          <text x="30" y="178" font-family="monospace" font-size="11" fill="#ffffff">JOHN DOE</text>
+          <text x="220" y="165" font-family="monospace" font-size="9" fill="#9a9a9a">VALID THRU</text>
+          <text x="220" y="178" font-family="monospace" font-size="11" fill="#ffffff">12/28</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CALL TO ACTION -->
+  <section class="cta-section">
+    <h2 class="cta-title">Access Our Model</h2>
+    <a href="#upload-section" class="btn-submit cta-button">Click Me!</a>
+  </section>
+<!-- SECTION 3: MODELS USED -->
+<section class="models-section">
+  <h2 class="section-title">Models Used for Prediction</h2>
+
+  <div class="models-grid">
+    <div class="model-card">
+      <h3>🧠SVM</h3>
+      <p>Support Vector Machine for classification</p>
+    </div>
+
+    <div class="model-card">
+      <h3>Random Forest</h3>
+      <p>Ensemble learning method for high accuracy</p>
+    </div>
+
+    <div class="model-card">
+      <h3>Logistic Regression</h3>
+      <p>Statistical model for binary classification</p>
+    </div>
+
+    <div class="model-card">
+      <h3>Isolation Forest</h3>
+      <p>Anomaly detection algorithm</p>
+    </div>
+  </div>
+</section>
+  <!-- SECTION 4: UPLOAD -->
+  <section id="upload-section" class="upload-section">
+    <h2 class="section-title">Machine Learning Prediction</h2>
+    <div class="upload-card">
+      <form id="upload-form" action="/predict" method="POST" enctype="multipart/form-data">
+        <div class="file-input-wrapper">
+          <label for="file" class="file-label">Choose CSV File</label>
+          <input type="file" id="file" name="file" accept=".csv" required />
+        </div>
+        <button type="submit" id="submit-btn" class="btn-submit">
+          <span class="btn-text">Detect Fraud</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('upload-form');
+      var btn = document.getElementById('submit-btn');
+      form.addEventListener('submit', function () {
+        btn.classList.add('is-loading');
+        btn.disabled = true;
+        btn.querySelector('.btn-text').textContent = 'Analyzing...';
+      });
+    })();
+  </script>
+</body>
+</html>
